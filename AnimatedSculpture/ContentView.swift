@@ -185,15 +185,42 @@ class SimpleARView: ARView {
 
 
         /*
-        // Example.
-        // Create stair pattern.
+        // Example: Stair pattern.
         for idx in 1..<10 {
+            // Create and position new entity.
             let newEntity = boxEntity.clone(recursive: false)
             newEntity.position.x = Float(idx) * 0.03
             newEntity.position.y = Float(idx) * 0.03
+
+            // Add to starting entity.
             boxEntity.addChild(newEntity)
-        } */
- 
+        }
+        */
+
+
+        /*
+        // Example: Spiral stair pattern.
+        
+        // Remember last entity in tree.
+        var lastBoxEntity = boxEntity
+
+        for _ in 0..<10 {
+            // Create and position new entity.
+            let newEntity = boxEntity.clone(recursive: false)
+            newEntity.position.x = 0.03
+            newEntity.position.y = 0.03
+
+            // Rotate on y-axis by 45 degrees.
+            newEntity.orientation = simd_quatf(angle: .pi / 4, axis: [0, 1, 0])
+
+            // Add to last entity in tree.
+            lastBoxEntity?.addChild(newEntity)
+            
+            // Set last entity used.
+            lastBoxEntity = newEntity
+        }
+        */
+
  
         // Setup example sphere entity.
         let sphereMesh = MeshResource.generateSphere(radius: 0.015)
